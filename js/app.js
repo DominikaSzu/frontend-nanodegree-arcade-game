@@ -9,14 +9,13 @@ var Enemy = function(x, y, speed) {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
     this.x += this.speed * dt;
     
     if (this.x > 505) {
         this.x = 0;
     }
+    
+    // it should handle collision with the player
 };
 
 // Draw the enemy on the screen, required method for game
@@ -34,16 +33,25 @@ let Player = function(x, y) {
 // update method
 
 Player.prototype.update = function (dt) {
-    
+   
 };
 
 // handleInput method
 
-Player.prototype.handleInput = function () {
+Player.prototype.handleInput = function (key) {
+    if (key == "left") {
+        this.x -= 100;
+    } else if (key == "up") {
+        this.y -= 83;       
+    } else if (key == "right") {
+        this.x += 100;
+    } else if (key == "down") {
+        this.y += 83;
+    }
     
 };
 
-// render method
+// Player render method
 
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
@@ -57,7 +65,7 @@ let allEnemies = [
     new Enemy(0, 230, 300),
 ];
 // Place the player object in a variable called player
-let player = new Player(150, 0);
+let player = new Player(200, 400);
 
 
 // This listens for key presses and sends the keys to your
