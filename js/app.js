@@ -39,13 +39,13 @@ Player.prototype.update = function (dt) {
 // handleInput method
 
 Player.prototype.handleInput = function (key) {
-    if (key == "left") {
+    if ((key == "left") && (this.x > 0)) {
         this.x -= 100;
-    } else if (key == "up") {
+    } else if ((key == "up") && (this.y > -10)) {
         this.y -= 83;       
-    } else if (key == "right") {
+    } else if ((key == "right") && (this.x < 400)) {
         this.x += 100;
-    } else if (key == "down") {
+    } else if ((key == "down") && (this.y < 400)) {
         this.y += 83;
     }
     
