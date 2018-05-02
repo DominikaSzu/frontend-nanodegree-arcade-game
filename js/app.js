@@ -4,6 +4,7 @@ var Enemy = function(x, y, speed) {
     this.y = y;
     this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
+
 };
 
 // Update the enemy's position, required method for game
@@ -15,7 +16,6 @@ Enemy.prototype.update = function(dt) {
         this.x = 0;
     }
     
-    // it should handle collision with the player
 };
 
 // Draw the enemy on the screen, required method for game
@@ -33,7 +33,7 @@ let Player = function(x, y) {
 // update method
 
 Player.prototype.update = function (dt) {
-   
+   player.checkCollisions();
 };
 
 // handleInput method
@@ -57,19 +57,13 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
 let allEnemies = [
-    new Enemy(0, 65, 230),
-    new Enemy(0, 150, 100),
-    new Enemy(0, 230, 300),
+    new Enemy(0, 65, 230, 101, 171),
+    new Enemy(0, 150, 100, 101, 171),
+    new Enemy(0, 230, 300, 101, 171),
 ];
-// Place the player object in a variable called player
-let player = new Player(200, 400);
 
-
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+let player = new Player(200, 400, 101, 171);
 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
@@ -81,3 +75,16 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+// collision detection function
+
+Player.prototype.checkCollisions = function() {
+    for (const enemy of allEnemies) {
+        if (this.x < enemy.x + 50 &&
+           this.x + 50 > enemy.x &&
+           this.y < enemy.y + 50 &&
+           50 + this.y > enemy.y) {
+            console.log("bang!")
+        }
+    }
+}
