@@ -4,7 +4,6 @@ var Enemy = function(x, y, speed) {
     this.y = y;
     this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
-
 };
 
 // Update the enemy's position, required method for game
@@ -34,6 +33,7 @@ let Player = function(x, y) {
 
 Player.prototype.update = function (dt) {
    player.checkCollisions();
+   player.winControl();
 };
 
 // handleInput method
@@ -58,12 +58,12 @@ Player.prototype.render = function() {
 }
 
 let allEnemies = [
-    new Enemy(0, 65, 230, 101, 171),
-    new Enemy(0, 150, 100, 101, 171),
-    new Enemy(0, 230, 300, 101, 171),
+    new Enemy(0, 65, 230),
+    new Enemy(0, 150, 100),
+    new Enemy(0, 230, 300),
 ];
 
-let player = new Player(200, 400, 101, 171);
+let player = new Player(200, 400);
 
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
@@ -84,7 +84,28 @@ Player.prototype.checkCollisions = function() {
            this.x + 50 > enemy.x &&
            this.y < enemy.y + 50 &&
            50 + this.y > enemy.y) {
-            console.log("bang!")
+            player.reset();
         }
     }
 }
+
+
+// reset method
+
+Player.prototype.reset = function () {
+    this.x = 200;
+    this.y = 400;
+    
+    allEnemies = [
+    new Enemy(0, 65, 230),
+    new Enemy(0, 150, 100),
+    new Enemy(0, 230, 300),
+];
+} 
+
+// win control
+
+Player.prototype.winControl = function () {
+if (player.y <= 0) {
+console.log("bangla")
+}}
