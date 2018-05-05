@@ -33,26 +33,26 @@ Enemy.prototype.update = function (dt) {
     if (this.x > 505) {
         this.x = 0;
     }
-};
+}
 
 // Draw the enemy on the screen, required method for game
 
 Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+}
 
 let Player = function (x, y) {
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-cat-girl.png';
-}
+};
 
 // Player udate method
 
 Player.prototype.update = function (dt) {
     this.checkCollisions();
     this.winControl();
-};
+}
 
 //Player handleInput method
 
@@ -67,7 +67,7 @@ Player.prototype.handleInput = function (key) {
         this.y += 83;
     }
 
-};
+}
 
 // Player render method
 
@@ -185,4 +185,4 @@ game.button.addEventListener("click", function () {
     player.sprite = character;
 
     player.render();
-})
+});
