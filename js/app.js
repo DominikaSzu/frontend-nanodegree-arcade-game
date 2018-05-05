@@ -78,7 +78,7 @@ Player.prototype.render = function () {
 let allEnemies = [
     new Enemy(0, 65, 80),
     new Enemy(0, 150, 50),
-    new Enemy(0, 230, 90),
+    new Enemy(0, 230, 90)
 ];
 
 let player = new Player(200, 400);
@@ -120,7 +120,7 @@ Player.prototype.reset = function () {
     allEnemies = [
     new Enemy(0, 65, 80),
     new Enemy(0, 150, 50),
-    new Enemy(0, 230, 90),
+    new Enemy(0, 230, 90)
 ];
     game.count.textContent = game.points;
 }
