@@ -1,7 +1,10 @@
-let points = 0;
-const count = document.querySelector(".count");
+const game = {
+    points: 0,
+    count: document.querySelector(".count")
+}
 
 // Enemies our player must avoid
+
 var Enemy = function (x, y, speed) {
     this.x = x;
     this.y = y;
@@ -11,13 +14,13 @@ var Enemy = function (x, y, speed) {
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
+
 Enemy.prototype.update = function (dt) {
     this.x += this.speed * dt;
 
     if (this.x > 505) {
         this.x = 0;
     }
-
 };
 
 // Draw the enemy on the screen, required method for game
@@ -61,9 +64,9 @@ Player.prototype.render = function () {
 }
 
 let allEnemies = [
-    new Enemy(0, 65, 230),
-    new Enemy(0, 150, 100),
-    new Enemy(0, 230, 300),
+    new Enemy(0, 65, 80),
+    new Enemy(0, 150, 50),
+    new Enemy(0, 230, 90),
 ];
 
 let player = new Player(200, 400);
@@ -88,6 +91,7 @@ Player.prototype.checkCollisions = function () {
             this.y < enemy.y + 50 &&
             50 + this.y > enemy.y) {
             player.reset();
+            resetSpeed(randomSpeed);
         }
     }
 }
@@ -99,25 +103,47 @@ Player.prototype.reset = function () {
     this.x = 200;
     this.y = 400;
 
-    
-    
     allEnemies = [
-    new Enemy(0, 65, 230),
-    new Enemy(0, 150, 100),
-    new Enemy(0, 230, 300),
+    new Enemy(0, 65, 80),
+    new Enemy(0, 150, 50),
+    new Enemy(0, 230, 90),
 ];
 
 }
 
 // Enemy reset method
 
-function randomSpeed () {
-    let num = Math.floor(Math.random() * 450);
-    
+function randomSpeed() {
+
+    let min;
+    let max;
+
+    if (game.points <= 8) {
+        min = 40;
+        max = 100;
+    } else if ((game.points > 8) && (game.points <= 13)) {
+        min = 110;
+        max = 200;
+    } else if ((game.points > 13) && (game.points <= 18)) {
+        min = 210;
+        max = 300;
+    } else if ((game.points > 18) && (game.points <= 23)) {
+        min = 310;
+        max = 400;
+    } else if ((game.points > 23) && (game.points <= 30)) {
+        min = 410;
+        max = 500;
+    } else {
+        min = 510;
+        max = 700;
+    }
+
+    let num = Math.floor(Math.random() * (max - min)) + min;
+
     return num;
 }
 
-function resetSpeed (randomSpeed) {
+function resetSpeed(randomSpeed) {
     for (let i = 0; i < allEnemies.length; i++) {
         allEnemies[i].speed = randomSpeed();
     }
@@ -127,8 +153,9 @@ function resetSpeed (randomSpeed) {
 
 Player.prototype.winControl = function () {
     if (player.y <= 0) {
-        points += 1;
-        count.textContent = points;        
+        game.points += 1;
+        game.count.textContent = game.points;
         player.reset();
+        resetSpeed(randomSpeed);
     }
 }
