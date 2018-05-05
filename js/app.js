@@ -90,6 +90,7 @@ Player.prototype.checkCollisions = function () {
             this.x + 50 > enemy.x &&
             this.y < enemy.y + 50 &&
             50 + this.y > enemy.y) {
+            game.points -= 1;
             player.reset();
             resetSpeed(randomSpeed);
         }
@@ -108,7 +109,7 @@ Player.prototype.reset = function () {
     new Enemy(0, 150, 50),
     new Enemy(0, 230, 90),
 ];
-
+    game.count.textContent = game.points;
 }
 
 // Enemy reset method
@@ -118,19 +119,19 @@ function randomSpeed() {
     let min;
     let max;
 
-    if (game.points <= 8) {
+    if (game.points <= 5) {
         min = 40;
         max = 100;
-    } else if ((game.points > 8) && (game.points <= 13)) {
+    } else if ((game.points > 5) && (game.points <= 10)) {
         min = 110;
         max = 200;
-    } else if ((game.points > 13) && (game.points <= 18)) {
+    } else if ((game.points > 10) && (game.points <= 16)) {
         min = 210;
         max = 300;
-    } else if ((game.points > 18) && (game.points <= 23)) {
+    } else if ((game.points > 16) && (game.points <= 21)) {
         min = 310;
         max = 400;
-    } else if ((game.points > 23) && (game.points <= 30)) {
+    } else if ((game.points > 21) && (game.points <= 28)) {
         min = 410;
         max = 500;
     } else {
