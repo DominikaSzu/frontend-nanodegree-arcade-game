@@ -1,3 +1,9 @@
 body {
     text-align: center;
 }
+
+.points {
+    margin-top: 20px;
+    margin-bottom: -20px;
+    font-family: 'Roboto', sans-serif; 
+}

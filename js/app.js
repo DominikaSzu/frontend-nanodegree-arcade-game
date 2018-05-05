@@ -1,3 +1,6 @@
+let points = 0;
+const count = document.querySelector(".count");
+
 // Enemies our player must avoid
 var Enemy = function (x, y, speed) {
     this.x = x;
@@ -124,6 +127,8 @@ function resetSpeed (randomSpeed) {
 
 Player.prototype.winControl = function () {
     if (player.y <= 0) {
-        window.setTimeout(player.reset, 1000);
+        points += 1;
+        count.textContent = points;        
+        player.reset();
     }
 }
