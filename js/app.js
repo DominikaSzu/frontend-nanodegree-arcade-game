@@ -1,7 +1,19 @@
 const game = {
     points: 0,
-    count: document.querySelector(".count")
-}
+    count: document.querySelector(".count"),
+    button: document.querySelector(".playerChange")
+};
+
+// possible characters
+
+const characters = [
+    'images/char-boy.png',
+    'images/char-cat-girl.png',
+    'images/char-horn-girl.png',
+    'images/char-princess-girl.png',
+    'images/char-pink-girl.png'
+];
+
 
 // Enemies our player must avoid
 
@@ -160,3 +172,16 @@ Player.prototype.winControl = function () {
         resetSpeed(randomSpeed);
     }
 }
+
+// changing the player functionality
+
+game.button.addEventListener("click", function () {
+    
+    let num = Math.floor(Math.random() * (4 - 0 + 1)) + 0;
+    
+    let character = characters[num];
+    
+    player.sprite = character;
+    
+    player.render();
+})
