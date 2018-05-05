@@ -33,13 +33,13 @@ Enemy.prototype.update = function (dt) {
     if (this.x > 505) {
         this.x = 0;
     }
-}
+};
 
 // Draw the enemy on the screen, required method for game
 
 Enemy.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 let Player = function (x, y) {
     this.x = x;
@@ -52,7 +52,7 @@ let Player = function (x, y) {
 Player.prototype.update = function (dt) {
     this.checkCollisions();
     this.winControl();
-}
+};
 
 //Player handleInput method
 
@@ -67,13 +67,13 @@ Player.prototype.handleInput = function (key) {
         this.y += 83;
     }
 
-}
+};
 
 // Player render method
 
 Player.prototype.render = function () {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 let allEnemies = [
     new Enemy(0, 65, 80),
@@ -109,7 +109,7 @@ Player.prototype.checkCollisions = function () {
             resetSpeed(randomSpeed);
         }
     }
-}
+};
 
 // Player reset method
 
@@ -123,7 +123,7 @@ Player.prototype.reset = function () {
     new Enemy(0, 230, 90)
 ];
     game.count.textContent = game.points;
-}
+};
 
 // Enemy reset method
 
