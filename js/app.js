@@ -4,7 +4,7 @@ const game = {
     button: document.querySelector(".playerChange")
 };
 
-// possible characters
+// Array with characters to choose
 
 const characters = [
     'images/char-boy.png',
@@ -47,14 +47,14 @@ let Player = function (x, y) {
     this.sprite = 'images/char-cat-girl.png';
 }
 
-// update method
+// Player udate method
 
 Player.prototype.update = function (dt) {
-    player.checkCollisions();
-    player.winControl();
+    this.checkCollisions();
+    this.winControl();
 };
 
-// handleInput method
+//Player handleInput method
 
 Player.prototype.handleInput = function (key) {
     if ((key == "left") && (this.x > 0)) {
@@ -83,6 +83,8 @@ let allEnemies = [
 
 let player = new Player(200, 400);
 
+// EventListener that listens user's moves
+
 document.addEventListener('keyup', function (e) {
     var allowedKeys = {
         37: 'left',
@@ -94,7 +96,7 @@ document.addEventListener('keyup', function (e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-// collision detection function
+// Collision detection function
 
 Player.prototype.checkCollisions = function () {
     for (const enemy of allEnemies) {
@@ -103,12 +105,11 @@ Player.prototype.checkCollisions = function () {
             this.y < enemy.y + 50 &&
             50 + this.y > enemy.y) {
             game.points -= 1;
-            player.reset();
+            this.reset();
             resetSpeed(randomSpeed);
         }
     }
 }
-
 
 // Player reset method
 
@@ -131,19 +132,19 @@ function randomSpeed() {
     let min;
     let max;
 
-    if (game.points <= 5) {
+    if (game.points <= 4) {
         min = 40;
         max = 100;
-    } else if ((game.points > 5) && (game.points <= 10)) {
+    } else if ((game.points > 4) && (game.points <= 8)) {
         min = 110;
         max = 200;
-    } else if ((game.points > 10) && (game.points <= 16)) {
+    } else if ((game.points > 8) && (game.points <= 13)) {
         min = 210;
         max = 300;
-    } else if ((game.points > 16) && (game.points <= 21)) {
+    } else if ((game.points > 13) && (game.points <= 19)) {
         min = 310;
         max = 400;
-    } else if ((game.points > 21) && (game.points <= 28)) {
+    } else if ((game.points > 19) && (game.points <= 24)) {
         min = 410;
         max = 500;
     } else {
@@ -162,26 +163,26 @@ function resetSpeed(randomSpeed) {
     }
 }
 
-// win control
+// Win control
 
 Player.prototype.winControl = function () {
     if (player.y <= 0) {
         game.points += 1;
         game.count.textContent = game.points;
-        player.reset();
+        this.reset();
         resetSpeed(randomSpeed);
     }
 }
 
-// changing the player functionality
+// Changing the player functionality
 
 game.button.addEventListener("click", function () {
-    
+
     let num = Math.floor(Math.random() * (4 - 0 + 1)) + 0;
-    
+
     let character = characters[num];
-    
+
     player.sprite = character;
-    
+
     player.render();
 })
